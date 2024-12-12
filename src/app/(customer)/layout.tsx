@@ -1,4 +1,4 @@
-import Navbar from '@/components/layouts/navbar/(customer)';
+import Navbar from '@/components/layouts/Navbar';
 import Footer from '@/components/layouts/footer';
 
 const CustomerLayout = ({ children }: { children: React.ReactNode }) => {

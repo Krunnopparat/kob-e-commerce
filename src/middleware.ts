@@ -64,9 +64,9 @@ export const middleware = async (req: NextRequest) => {
   response.headers.set('X-USER-INFO', JSON.stringify(userInfo)); // เพิ่มข้อมูลผู้ใช้ใน header
 
   // ตรวจสอบเส้นทางที่ต้องการการยืนยันตัวตน
-  if (protectedRoutes.includes(pathname) && !userInfo.isAuthenticated) {
-    return NextResponse.redirect(new URL('/sign-in', req.url)); // เปลี่ยนเส้นทางไปหน้า sign-in
-  }
+  // if (protectedRoutes.includes(pathname) && !userInfo.isAuthenticated) {
+  //   return NextResponse.redirect(new URL('/sign-in', req.url)); // เปลี่ยนเส้นทางไปหน้า sign-in
+  // }
 
   // ตรวจสอบเส้นทางของผู้ดูแลระบบ
   if (isAdminRoute(pathname) && (!userInfo.isAuthenticated || userInfo.role !== 'ADMIN')) {

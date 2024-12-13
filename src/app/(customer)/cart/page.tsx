@@ -44,7 +44,7 @@ export default function CartPage(){
   ];
 
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = 0; // ส่งฟรี
+  const shipping = 0;
   const total = subtotal + shipping;
 
   return (

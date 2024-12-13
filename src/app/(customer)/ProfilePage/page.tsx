@@ -21,7 +21,6 @@ import {
 } from 'lucide-react';
 
 export default function ProfilePage() {
-  // ข้อมูลตัวอย่าง
   const user = {
     name: 'คุณ สมชาย ใจดี',
     email: 'somchai@example.com',
@@ -44,7 +43,6 @@ export default function ProfilePage() {
         }
       ]
     },
-    // ... สามารถเพิ่มข้อมูลออเดอร์อื่นๆ
   ];
 
   return (

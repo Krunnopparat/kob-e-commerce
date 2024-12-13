@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
+import { useToast } from '@/hooks/use-toast';
 import {
     Select,
     SelectContent,
@@ -27,8 +29,11 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
+import Link from 'next/link';
 
 export default function ProductsPage() {
+    const { toast } = useToast();
+    
     const categories = [
         { id: 'phones', name: 'สมาร์ทโฟน', count: 124 },
         { id: 'laptops', name: 'โน๊ตบุ๊ค', count: 89 },
@@ -45,8 +50,8 @@ export default function ProductsPage() {
         { id: 'lenovo', name: 'Lenovo', count: 56 },
     ];
 
-    const products = Array(12).fill({
-        id: 1,
+    const products = Array(12).fill({}).map((_, index) => ({
+        id: index + 1,
         name: 'iPhone 15 Pro',
         spec: 'A17 Pro | 256GB | Natural Titanium',
         price: 49900,
@@ -59,8 +64,8 @@ export default function ProductsPage() {
         },
         rating: 4,
         reviews: 256,
-        badge: 'ใหม่'
-    });
+        badge: 'ขายดี'
+    }));
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-6">
@@ -94,7 +99,6 @@ export default function ProductsPage() {
                             <SheetHeader>
                                 <SheetTitle>กรองสินค้า</SheetTitle>
                             </SheetHeader>
-                            {/* Filter Content - Mobile */}
                             <div className="mt-4">
                                 <FilterAccordions />
                             </div>
@@ -115,50 +119,65 @@ export default function ProductsPage() {
                 <div className="flex-1">
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                         {products.map((product, index) => (
-                            <Card key={index} className="border rounded-lg overflow-hidden group">
-                                <div className="relative">
-                                    <div className="aspect-square bg-white p-4">
-                                        <Image
-                                            src={product.image.src}
-                                            alt={product.image.alt}
-                                            width={product.image.width}
-                                            height={product.image.height}
-                                            className="object-contain w-full h-full"
-                                        />
-                                    </div>
-                                    {product.badge && (
-                                        <Badge className="absolute top-2 left-2 bg-blue-500 text-white font-normal">
-                                            {product.badge}
-                                        </Badge>
-                                    )}
-                                </div>
+                            <Link href={`/products/${product.id}`} key={index}>
 
-                                <CardContent className="p-4">
-                                    <h3 className="font-medium text-base mb-1 line-clamp-1">
-                                        {product.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-600 mb-2 line-clamp-1">
-                                        {product.spec}
-                                    </p>
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-xl font-bold text-primary">
-                                            ฿{product.price.toLocaleString()}
-                                        </span>
-                                        {product.originalPrice > product.price && (
-                                            <span className="text-sm text-gray-400 line-through">
-                                                ฿{product.originalPrice.toLocaleString()}
-                                            </span>
+                                <Card className="border rounded-lg overflow-hidden group hover:scale-[1.02] transition-transform duration-300 ease-out">
+                                    <div className="relative">
+                                        <div className="aspect-square bg-white p-4">
+                                            <Image
+                                                src={product.image.src}
+                                                alt={product.image.alt}
+                                                width={product.image.width}
+                                                height={product.image.height}
+                                                className="object-contain w-full h-full"
+                                            />
+                                        </div>
+                                        {product.badge && (
+                                            <Badge className="absolute top-2 left-2 bg-blue-500 text-white font-normal">
+                                                {product.badge}
+                                            </Badge>
                                         )}
                                     </div>
-                                </CardContent>
 
-                                <CardFooter className="p-4 pt-0">
-                                    <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white" size="sm">
-                                        <ShoppingCart className="h-4 w-4 mr-2" />
-                                        เพิ่มลงตะกร้า
-                                    </Button>
-                                </CardFooter>
-                            </Card>
+                                    <CardContent className="p-4">
+                                        <h3 className="font-medium text-base mb-1 line-clamp-1">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-600 mb-2 line-clamp-1">
+                                            {product.spec}
+                                        </p>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-xl font-bold text-primary">
+                                                ฿{product.price.toLocaleString()}
+                                            </span>
+                                            {product.originalPrice > product.price && (
+                                                <span className="text-sm text-gray-400 line-through">
+                                                    ฿{product.originalPrice.toLocaleString()}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </CardContent>
+
+                                    <CardFooter className="p-4 pt-0">
+                                        <Button 
+                                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-white" 
+                                        size="sm" 
+                                        onClick={(e: React.MouseEvent) => {
+                                            e.preventDefault();
+                                            setTimeout(() => {
+                                                toast({
+                                                    title: "เพิ่มสินค้าสำเร็จ",
+                                                    description: `เพิ่ม ${product.name} ลงในตะกร้าแล้ว`,
+                                                });
+                                            }, 1000);
+                                        }}
+                                        >
+                                            <ShoppingCart className="h-4 w-4 mr-2" />
+                                            เพิ่มลงตะกร้า
+                                        </Button>
+                                    </CardFooter>
+                                </Card>
+                            </Link>
                         ))}
                     </div>
 

@@ -20,7 +20,7 @@ type SelectFormProps = {
   defaultValue?: string;
 };
 
-const SelectForm = ({ someData, label, name, required, widthInput, defaultValue }: SelectFormProps) => {
+const SelectForm = ({ someData = [], label, name, required, widthInput, defaultValue }: SelectFormProps) => {
   return (
     <div className='space-y-2'>
       <Label>{label} {required && <span className='text-red-500'>*</span>}</Label>

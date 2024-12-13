@@ -1,11 +1,11 @@
 import Navbar from '@/components/layouts/Navbar';
-import Footer from '@/components/layouts/footer';
+import Footer from '@/components/layouts/footer ';
 
 const CustomerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='h-full flex flex-col'>
       <Navbar />
-      <main className='flex-1 container mx-auto px-4 py-8'>
+      <main className='flex-1 container mx-auto px-4 py-8 pt-16 md:pt-16'>
         {children}
       </main>
       <Footer />

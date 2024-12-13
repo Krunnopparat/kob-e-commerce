@@ -14,7 +14,7 @@ const EditCategoryPage = async ({ params }: { params: Promise<{ id: string }> })
 
   return (
     <div className='h-full flex items-center justify-center'>
-      <div className='border border-gray-200 rounded-md w-[650px] overflow-hidden shadow-lg p-4 space-y-4'>
+      <div className='border border-gray-200 rounded-md w-full md:w-[650px] overflow-hidden shadow-lg p-4 space-y-4'>
         <div className='flex flex-col gap-1'>
           <h1 className='text-xl font-semibold'>แก้ไขข้อมูลสินค้า: {category?.name}</h1>
           <p className='text-xs'>ไอดีหมวดหมู่: {id}</p>

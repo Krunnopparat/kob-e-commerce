@@ -1,19 +1,17 @@
 import type { Metadata } from 'next';
+import CreateCategoryForm from '@/components/categories/CreateCategoryForm';
 
 export const metadata: Metadata = {
-  title: 'Create Category',
+  title: 'เพิ่มหมวดหมู่สินค้าใหม่',
+  description: 'เพิ่มหมวดหมู่สินค้าใหม่สำหรับร้านค้าของคุณ'
 };
-
-import CreateCategoryForm from '@/components/categories/CreateCategoryForm';
 
 const CreateCategoryPage = () => {
   return (
-    <div className='h-full flex items-center justify-center'>
-      <div className='border border-gray-200 rounded-md w-[650px] overflow-hidden shadow-lg'>
-        <h1 className='text-xl text-center font-semibold bg-yellow-500 text-white p-2'>กรอกข้อมูลหมวดหมู่ใหม่</h1>
-        <CreateCategoryForm />
-      </div>
+    <div className="bg-gray-50/50 flex items-center justify-center p-6">
+      <CreateCategoryForm />
     </div>
   );
 };
+
 export default CreateCategoryPage;

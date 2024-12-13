@@ -142,7 +142,7 @@ export default function HomePage(){
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product, index) => (
-            <Card key={index} className="border rounded-lg overflow-hidden group">
+            <Card key={index} className="border rounded-lg overflow-hidden group hover:scale-[1.02] transition-transform duration-300 ease-out">
               <div className="relative">
                 <div className="aspect-square bg-white p-4">
                   <Image

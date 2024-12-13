@@ -69,14 +69,14 @@ export const middleware = async (req: NextRequest) => {
   // }
 
   // ตรวจสอบเส้นทางของผู้ดูแลระบบ
-  if (isAdminRoute(pathname) && (!userInfo.isAuthenticated || userInfo.role !== 'ADMIN')) {
-    return NextResponse.redirect(new URL('/', req.url)); // เปลี่ยนเส้นทางไปหน้าแรก
-  }
+  // if (isAdminRoute(pathname) && (!userInfo.isAuthenticated || userInfo.role !== 'ADMIN')) {
+  //   return NextResponse.redirect(new URL('/', req.url)); // เปลี่ยนเส้นทางไปหน้าแรก
+  // }
 
-  // ป้องกันการเข้าถึงหน้า sign-in หรือ sign-up เมื่อผู้ใช้ล็อกอินแล้ว
-  if (userInfo.isAuthenticated && (pathname === '/sign-in' || pathname === '/sign-up')) {
-    return NextResponse.redirect(new URL('/', req.url)); // เปลี่ยนเส้นทางไปหน้าแรก
-  }
+  // // ป้องกันการเข้าถึงหน้า sign-in หรือ sign-up เมื่อผู้ใช้ล็อกอินแล้ว
+  // if (userInfo.isAuthenticated && (pathname === '/sign-in' || pathname === '/sign-up')) {
+  //   return NextResponse.redirect(new URL('/', req.url)); // เปลี่ยนเส้นทางไปหน้าแรก
+  // }
 
   return response; // ส่งคำตอบกลับ
 };
